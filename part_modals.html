@@ -1,0 +1,192 @@
+            <!-- Customer Details Modal -->
+            <div class="modal-overlay" id="customer-modal">
+                <div class="modal">
+                    <div class="modal-header">
+                        <h3 id="modal-title">Customer Details</h3>
+                        <button class="close-modal"><span class="material-icons-round">close</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <label>Customer Name</label>
+                            <input type="text" placeholder="John Doe" id="customer-name">
+                        </div>
+                        <div class="input-group">
+                            <label>Customer Phone Number</label>
+                            <input type="tel" placeholder="+91 98765 43210" id="customer-phone">
+                        </div>
+                        <div class="input-group">
+                            <label>Payment Method</label>
+                            <select id="payment-method">
+                                <option value="Cash">Cash</option>
+                                <option value="Card">Card</option>
+                                <option value="Online UPI">Online UPI</option>
+                            </select>
+                        </div>
+                        <div class="input-group" style="display: flex; gap: 10px; align-items: flex-end;">
+                            <div style="flex: 1;">
+                                <label>Discount Type</label>
+                                <select id="discount-type">
+                                    <option value="percent">Percent (%)</option>
+                                    <option value="fixed">Fixed (₹)</option>
+                                </select>
+                            </div>
+                            <div style="flex: 1;">
+                                <label>Discount Value</label>
+                                <input type="number" id="discount-value" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-primary" id="confirm-customer-details">Proceed</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Details Modal (View History & Edit) -->
+            <div class="modal-overlay" id="order-details-modal">
+                <div class="modal" style="width: 500px;">
+                    <div class="modal-header">
+                        <h3>Order Details</h3>
+                        <button class="close-modal close-modal-details"><span
+                                class="material-icons-round">close</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="order-info-grid"
+                            style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <div>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">Order ID</p>
+                                <p style="font-weight: bold;" id="view-order-id"></p>
+                            </div>
+                            <div>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">Date</p>
+                                <p style="font-weight: bold;" id="view-order-date"></p>
+                            </div>
+                            <div>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">Customer</p>
+                                <input type="text" id="edit-customer-name" class="edit-input hidden" placeholder="Name">
+                                <p style="font-weight: bold;" id="view-customer-name"></p>
+                            </div>
+                            <div>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">Phone</p>
+                                <input type="text" id="edit-customer-phone" class="edit-input hidden"
+                                    placeholder="Phone">
+                                <p style="font-weight: bold;" id="view-customer-phone"></p>
+                            </div>
+                            <div>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">Payment</p>
+                                <select id="edit-payment-method" class="edit-input hidden">
+                                    <option value="Cash">Cash</option>
+                                    <option value="Card">Card</option>
+                                    <option value="Online UPI">Online UPI</option>
+                                </select>
+                                <p style="font-weight: bold;" id="view-payment-method"></p>
+                            </div>
+                            <div>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">Status</p>
+                                <select id="edit-order-status" class="edit-input hidden">
+                                    <option value="Completed">Completed</option>
+                                    <option value="Payable">Payable</option>
+                                    <option value="Parcel">Parcel</option>
+                                </select>
+                                <span class="status completed" id="view-order-status">Completed</span>
+                            </div>
+                        </div>
+                        <hr style="border-top: 1px solid var(--border-color); margin: 1rem 0;">
+                        <div style="max-height: 200px; overflow-y: auto;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tbody id="view-order-items">
+                                    <!-- Items -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr style="border-top: 1px dashed var(--border-color); margin: 1rem 0;">
+                        <div class="receipt-totals">
+                            <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>Subtotal:</span> <span id="view-order-subtotal"></span>
+                            </div>
+                            <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>Tax:</span> <span id="view-order-tax"></span>
+                            </div>
+                            <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>Charges:</span> <span id="view-order-charges"></span>
+                            </div>
+                            <div class="row"
+                                style="display: flex; justify-content: space-between; margin-bottom: 5px; color: green;">
+                                <span>Discount:</span> <span id="view-order-discount">-₹0.00</span>
+                            </div>
+                            <div class="row total"
+                                style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem; margin-top: 10px;">
+                                <span>Total:</span> <span id="view-order-total"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn-secondary" id="reprint-order-btn"
+                                style="display: flex; align-items: center; gap: 5px;">
+                                <span class="material-icons-round" style="font-size: 1.1rem;">print</span> Print
+                            </button>
+                            <button class="btn-secondary" id="resend-ebill-btn"
+                                style="display: flex; align-items: center; gap: 5px; background-color: #25D366; color: white; border: none;">
+                                <span class="material-icons-round" style="font-size: 1.1rem;">send</span> WhatsApp
+                            </button>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn-danger" id="delete-order-btn">Delete</button>
+                            <button class="btn-secondary" id="edit-order-btn">Edit</button>
+                            <button class="btn-primary hidden" id="save-order-btn">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden Receipt for Printing -->
+            <div id="printable-area" class="hidden">
+                <div class="receipt">
+                    <div class="receipt-header">
+                        <h2>Meat & Eat</h2>
+                        <p>123 Food Street, Flavor Town</p>
+                        <p>Tel: +91 1234567890</p>
+                        <hr>
+                        <p>Date: <span id="receipt-date"></span></p>
+                        <p>Order #: <span id="receipt-order-id"></span></p>
+                        <div id="receipt-customer-details">
+                            <p>Customer: <span id="receipt-customer-name"></span></p>
+                            <p>Phone: <span id="receipt-customer-phone"></span></p>
+                            <p>Payment: <span id="receipt-payment-method"></span></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <table class="receipt-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="receipt-items">
+                            <!-- Items -->
+                        </tbody>
+                    </table>
+                    <hr>
+                    <div class="receipt-totals">
+                        <div class="row"><span>Subtotal:</span> <span id="receipt-subtotal"></span></div>
+                        <div id="receipt-tax-charges-container"></div>
+                        <div class="row total"><span>Total:</span> <span id="receipt-total"></span></div>
+                    </div>
+                    <hr>
+                    <div class="receipt-footer">
+                        <span class="material-icons-round">print</span> Print
+                        </button>
+                        <button class="btn-primary" id="ebill-btn" style="flex: 1; justify-content: center;">
+                            <span class="material-icons-round">sms</span> E-Bill
+                        </button>
+                    </div>
+                    <button class="btn-secondary" id="send-to-list-btn"
+                        style="width: 100%; background-color: #6c757d; color: white; justify-content: center;">
+                        <span class="material-icons-round">list_alt</span> Send to Order List
+                    </button>
+                </div>
+            </div>

@@ -1,0 +1,103 @@
+        <!-- Reports View -->
+        <div id="reports-view" class="view-section hidden">
+            <div class="orders-header-bar" style="margin-bottom: 2rem;">
+                <h2>Reports & Analytics</h2>
+                <div class="orders-actions">
+                    <select id="report-period-select"
+                        style="background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.8rem; border-radius: 12px; outline: none;">
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="all">All Time</option>
+                    </select>
+                    <button class="btn-primary" id="refresh-reports-btn">
+                        <span class="material-icons-round">refresh</span> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="orders-stats" style="grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                <div class="stat-card">
+                    <h4>Total Revenue</h4>
+                    <p id="rep-total-revenue">₹0.00</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Orders</h4>
+                    <p id="rep-total-orders">0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Avg Order Value</h4>
+                    <p id="rep-avg-order">₹0.00</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Most Pop. Item</h4>
+                    <p id="rep-top-item" style="font-size: 1.2rem !important;">-</p>
+                </div>
+            </div>
+
+            <!-- Charts Area -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                <!-- Sales Trend Chart -->
+                <div
+                    style="background: var(--card-bg); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color);">
+                    <h4 style="margin-bottom: 1rem; color: var(--text-muted);">Sales Trend</h4>
+                    <canvas id="salesTrendChart"></canvas>
+                </div>
+
+                <!-- Category Distribution -->
+                <div
+                    style="background: var(--card-bg); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color);">
+                    <h4 style="margin-bottom: 1rem; color: var(--text-muted);">Sales by Category</h4>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Top Items & Inventory Health -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+
+                <!-- Top Selling Items Table -->
+                <div
+                    style="background: var(--card-bg); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color);">
+                    <h4 style="margin-bottom: 1rem; color: var(--text-muted);">Top Selling Items</h4>
+                    <div style="max-height: 300px; overflow-y: auto;">
+                        <table style="width: 100%; border-collapse: collapse; color: var(--text-main);">
+                            <thead>
+                                <tr
+                                    style="border-bottom: 1px solid var(--border-color); text-align: left; color: var(--text-muted);">
+                                    <th style="padding: 10px;">Item</th>
+                                    <th style="padding: 10px;">Qty Sold</th>
+                                    <th style="padding: 10px;">Revenue</th>
+                                </tr>
+                            </thead>
+                            <tbody id="top-items-tbody">
+                                <!-- Injected -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Inventory Health (Low Stock) -->
+                <div
+                    style="background: var(--card-bg); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color);">
+                    <h4 style="margin-bottom: 1rem; color: var(--text-muted);">Inventory Health (Low Stock < 20)</h4>
+                            <div style="max-height: 300px; overflow-y: auto;">
+                                <table style="width: 100%; border-collapse: collapse; color: var(--text-main);">
+                                    <thead>
+                                        <tr
+                                            style="border-bottom: 1px solid var(--border-color); text-align: left; color: var(--text-muted);">
+                                            <th style="padding: 10px;">Item</th>
+                                            <th style="padding: 10px;">Current Stock</th>
+                                            <th style="padding: 10px;">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="inventory-health-tbody">
+                                        <!-- Injected -->
+                                    </tbody>
+                                </table>
+                            </div>
+                </div>
+
+            </div>
+        </div>
+

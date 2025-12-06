@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meat and Eat POS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Acme&family=Amatic+SC:wght@400;700&family=Anton&family=Architects+Daughter&family=Bebas+Neue&family=Bree+Serif&family=Cabin:wght@400;700&family=Cairo:wght@400;700&family=Catamaran:wght@400;700&family=Caveat:wght@400;700&family=Comfortaa:wght@400;700&family=Comic+Neue:wght@400;700&family=Cookie&family=Courgette&family=Crimson+Text:wght@400;700&family=Dancing+Script:wght@400;700&family=DM+Sans:wght@400;700&family=Dosis:wght@400;700&family=EB+Garamond:wght@400;700&family=Exo+2:wght@400;700&family=Fjalla+One&family=Francois+One&family=Fredoka+One&family=Gloria+Hallelujah&family=Great+Vibes&family=Heebo:wght@400;700&family=IBM+Plex+Sans:wght@400;700&family=Indie+Flower&family=Josefin+Sans:wght@400;700&family=Kanit:wght@400;700&family=Lato:wght@300;400;700&family=Libre+Baskerville:wght@400;700&family=Lobster&family=Lora:wght@400;700&family=Merriweather:wght@300;400;700&family=Monoton&family=Montserrat:wght@300;400;700&family=Mukta:wght@400;700&family=Nunito:wght@400;700&family=Old+Standard+TT:wght@400;700&family=Open+Sans:wght@300;400;700&family=Oswald:wght@300;400;700&family=Outfit:wght@300;400;500;600;700&family=Pacifico&family=Parisienne&family=Passion+One:wght@400;700&family=Patrick+Hand&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&family=Press+Start+2P&family=Prompt:wght@400;700&family=PT+Sans:wght@400;700&family=Quicksand:wght@400;700&family=Raleway:wght@300;400;700&family=Righteous&family=Roboto:wght@300;400;700&family=Roboto+Condensed:wght@400;700&family=Roboto+Slab:wght@400;700&family=Rubik:wght@400;700&family=Russo+One&family=Sacramento&family=Satisfy&family=Shadows+Into+Light&family=Signika:wght@400;700&family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:wght@400;700&family=Space+Mono:wght@400;700&family=Teko:wght@400;700&family=Titillium+Web:wght@400;700&family=Ubuntu:wght@400;700&family=Varela+Round&family=Work+Sans:wght@400;700&family=Yellowtail&family=Zilla+Slab:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* ... existing styles ... */
+    </style>
+</head>
+
+<body>
+    <!-- Login View -->
+    <div id="login-view" class="login-container">
+        <div class="login-card">
+            <div class="logo" style="justify-content: center; margin-bottom: 2rem; align-items: center;">
+                <img id="login-logo-img" src=""
+                    style="display: none; width: 60px; height: 60px; object-fit: cover; border-radius: 50%; margin-right: 15px;">
+                <span id="login-logo-icon" class="material-icons-round" style="font-size: 3rem;">restaurant_menu</span>
+                <h1 style="font-size: 2rem;">Meat & Eat</h1>
+            </div>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--text-muted);">Admin Login</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label style="color: var(--text-muted); margin-bottom: 0.5rem;">Username</label>
+                    <input type="text" id="login-username" placeholder="Enter Username" required>
+                </div>
+                <div class="input-group">
+                    <label style="color: var(--text-muted); margin-bottom: 0.5rem;">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter Password" required>
+                </div>
+                <button type="submit" class="btn-primary"
+                    style="width: 100%; padding: 1rem; margin-top: 1rem; font-size: 1.1rem;">Login</button>
+            </form>
+            <p id="login-error"
+                style="color: var(--primary-color); text-align: center; margin-top: 1rem; display: none;">Invalid
+                Credentials</p>
+        </div>
+    </div>
+
+    <div class="app-container hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img id="sidebar-logo-img" src=""
+                    style="display: none; width: 40px; height: 40px; object-fit: cover; border-radius: 50%;">
+                <span id="sidebar-logo-icon" class="material-icons-round">restaurant_menu</span>
+                <h1>Meat & Eat</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item" id="nav-home">
+                    <span class="material-icons-round">home</span>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-item active" id="nav-menu">
+                    <span class="material-icons-round">dashboard</span>
+                    <span>Menu</span>
+                </a>
+                <a href="#" class="nav-item" id="nav-orders">
+                    <span class="material-icons-round">receipt_long</span>
+                    <span>Orders</span>
+                </a>
+                <a href="#" class="nav-item" id="nav-reports">
+                    <span class="material-icons-round">insights</span>
+                    <span>Reports</span>
+                </a>
+                <a href="#" class="nav-item" id="nav-settings">
+                    <span class="material-icons-round">settings</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-bar">
+                    <span class="material-icons-round">search</span>
+                    <input type="text" id="global-search-input" placeholder="Search menu items...">
+                </div>
+                <div class="user-profile">
+                    <span id="current-user-name">Cashier</span>
+                    <div class="avatar" id="current-user-avatar">C</div>
+                    <button id="logout-btn" class="btn-secondary"
+                        style="padding: 5px; margin-left: 10px; border: none; background: transparent; color: var(--primary-color); display: flex; align-items: center; justify-content: center;"
+                        title="Logout">
+                        <span class="material-icons-round">logout</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Home / Table View -->
+            <div id="home-view" class="view-section hidden">
+                <div class="orders-header-bar">
+                    <h2>Table Management</h2>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-secondary" id="reset-tables-btn" style="color: #666;">
+                            <span class="material-icons-round">restart_alt</span> Reset All
+                        </button>
+                        <button class="btn-primary" id="add-table-btn">
+                            <span class="material-icons-round">add</span> Add Table
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table Stats & Filters -->
+                <div class="table-dashboard-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <div class="stat-card"
+                        style="padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <h4 style="color: var(--text-muted); font-size: 0.9rem;">Total Tables</h4>
+                        <p id="table-stat-total" style="font-size: 1.5rem; font-weight: bold; color: var(--text-main);">
+                            0</p>
+                    </div>
+                    <div class="stat-card"
+                        style="padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <h4 style="color: var(--text-muted); font-size: 0.9rem;">Occupied</h4>
+                        <p id="table-stat-occupied"
+                            style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">0</p>
+                    </div>
+                    <div class="stat-card"
+                        style="padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <h4 style="color: var(--text-muted); font-size: 0.9rem;">Available</h4>
+                        <p id="table-stat-available" style="font-size: 1.5rem; font-weight: bold; color: #28a745;">0</p>
+                    </div>
+                </div>
+
+                <div class="table-filters" style="margin-bottom: 1.5rem; display: flex; gap: 10px;">
+                    <button class="tab active" id="filter-table-all">All</button>
+                    <button class="tab" id="filter-table-available">Available</button>
+                    <button class="tab" id="filter-table-occupied">Occupied</button>
+                </div>
+                <div class="tables-grid" id="tables-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.5rem;">
+                    <!-- Tables injected here -->
+                </div>
+            </div>
+
+            <!-- Menu View -->
+            <div id="menu-view" class="view-section">
+                <!-- ... existing menu content ... -->
+                <div class="category-tabs">
+                    <button class="tab active" data-category="all">All</button>
+                    <button class="tab" data-category="burgers">Burgers</button>
+                    <button class="tab" data-category="pizza">Pizza</button>
+                    <button class="tab" data-category="chicken">Fried Chicken</button>
+                    <button class="tab" data-category="wraps">Wraps & Sandwiches</button>
+                    <button class="tab" data-category="sides">Sides</button>
+                    <button class="tab" data-category="drinks">Drinks</button>
+                    <button class="tab" data-category="desserts">Desserts</button>
+                    <button class="tab" data-category="combos">Combos</button>
+                </div>
+                <div class="menu-controls"
+                    style="margin-bottom: 20px; display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap;">
+                    <input type="number" id="menu-min-price" placeholder="Min ₹"
+                        style="padding: 8px; width: 80px; border-radius: 6px; border: 1px solid #ddd;">
+                    <input type="number" id="menu-max-price" placeholder="Max ₹"
+                        style="padding: 8px; width: 80px; border-radius: 6px; border: 1px solid #ddd;">
+
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <label for="menu-sort" style="font-weight: 500;">Sort:</label>
+                        <select id="menu-sort" style="padding: 8px; border-radius: 6px; border: 1px solid #ddd;">
+                            <option value="default">Default</option>
+                            <option value="low-to-high">Low to High</option>
+                            <option value="high-to-low">High to Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="menu-grid" id="menu-grid">
+                    <!-- Menu items will be injected here -->
+                </div>
+            </div>
+
+            <!-- Orders View -->
+            <div id="orders-view" class="view-section hidden">
+                <!-- ... existing orders content ... -->
+                <div class="orders-header-bar"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Order History</h2>
+                    <div class="orders-actions" style="display: flex; gap: 10px;">
+                        <input type="date" id="filter-date-start" class="form-control"
+                            style="padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                        <input type="date" id="filter-date-end" class="form-control"
+                            style="padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                        <button class="btn-primary" id="download-report-btn">
+                            <span class="material-icons-round">download</span> Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="orders-stats"
+                    style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+                    <div class="stat-card"
+                        style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                        <h4>Total Orders</h4>
+                        <p id="stats-total-orders"
+                            style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">0</p>
+                    </div>
+                    <div class="stat-card"
+                        style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                        <h4>Total Revenue</h4>
+                        <p id="stats-total-revenue"
+                            style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">₹0.00</p>
+                    </div>
+                    <div class="stat-card"
+                        style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                        <h4>Average Order</h4>
+                        <p id="stats-avg-order"
+                            style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">₹0.00</p>
+                    </div>
+                </div>
+                <div class="orders-list" id="orders-history-list">
+                    <!-- Orders List -->
+                </div>
+            </div>
+            <!-- Reports View -->
+            <div id="reports-view" class="view-section hidden">
+                <div class="orders-header-bar" style="margin-bottom: 2rem;">
+                    <h2>Reports & Analytics</h2>
+                    <div class="orders-actions">
+                        <select id="report-period-select"
+                            style="background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.8rem; border-radius: 12px; outline: none;">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="all">All Time</option>
+                        </select>
+                        <button class="btn-primary" id="refresh-reports-btn">
+                            <span class="material-icons-round">refresh</span> Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="orders-stats"
+                    style="grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <h4>Total Revenue</h4>
+                        <p id="rep-total-revenue">₹0.00</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Total Orders</h4>
+                        <p id="rep-total-orders">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Avg Order Value</h4>
+                        <p id="rep-avg-order">₹0.00</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Most Pop. Item</h4>
+                        <p id="rep-top-item" style="font-size: 1.2rem !important;">-</p>
+                    </div>
+                </div>
+
+                <!-- Charts Area -->
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                    <!-- Sales Trend Chart -->
+                    <div
+                        style="background: var(--card-bg); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color);">
+                        <h4 style="margin-bottom: 1rem; color: var(--text-muted);">Sales Trend</h4>
+                        <canvas id="salesTrendChart"></canvas>
+                    </div>
+
+                    <!-- Category Distribution -->
+                    <div
+                        style="background: var(--card-bg); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color);">
+                        <h4 style="margin-bottom: 1rem; color: var(--text-muted);">Sales by Category</h4>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Bottom Section: Top Items & Inventory Health -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+
+                    <!-- Top Selling Items Table -->
+                    <div
+                        style="background: var(--card-bg); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color);">
+                        <h4 style="margin-bottom: 1rem; color: var(--text-muted);">Top Selling Items</h4>
+                        <div style="max-height: 300px; overflow-y: auto;">
+                            <table style="width: 100%; border-collapse: collapse; color: var(--text-main);">
+                                <thead>
+                                    <tr
+                                        style="border-bottom: 1px solid var(--border-color); text-align: left; color: var(--text-muted);">
+                                        <th style="padding: 10px;">Item</th>
+                                        <th style="padding: 10px;">Qty Sold</th>
+                                        <th style="padding: 10px;">Revenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="top-items-tbody">
+                                    <!-- Injected -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Health (Low Stock) -->
+                    <div
+                        style="background: var(--card-bg); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color);">
+                        <h4 style="margin-bottom: 1rem; color: var(--text-muted);">Inventory Health (Low Stock <
+                                20)</h4>
+                                <div style="max-height: 300px; overflow-y: auto;">
+                                    <table style="width: 100%; border-collapse: collapse; color: var(--text-main);">
+                                        <thead>
+                                            <tr
+                                                style="border-bottom: 1px solid var(--border-color); text-align: left; color: var(--text-muted);">
+                                                <th style="padding: 10px;">Item</th>
+                                                <th style="padding: 10px;">Current Stock</th>
+                                                <th style="padding: 10px;">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="inventory-health-tbody">
+                                            <!-- Injected -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Settings View -->
+            <div id="settings-view" class="view-section hidden">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Settings</h2>
+                    <button id="lock-settings-btn" class="btn-secondary" title="Lock Settings"
+                        style="border: none; background: transparent;">
+                        <span class="material-icons-round" id="lock-icon"
+                            style="font-size: 1.5rem; color: var(--success-color);">lock_open</span>
+                    </button>
+                </div>
+                <div class="settings-container">
+                    <!-- Appearance Settings -->
+                    <div class="settings-section" style="margin-top: 0; padding-top: 0; border-top: none;">
+                        <h3>Appearance</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>App Theme</label>
+                                <select id="theme-select">
+                                    <option value="dark">Dark Mode</option>
+                                    <option value="light">Light Mode</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bill / Restaurant Configuration -->
+                    <div class="settings-section" style="margin-top: 0; padding-top: 0; border-top: none;">
+                        <h3>Restaurant & Bill Settings</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Restaurant Name</label>
+                                <input type="text" id="bill-rest-name" placeholder="Meat & Eat">
+                            </div>
+                            <div class="form-group">
+                                <label>Name Font Style</label>
+                                <select id="bill-rest-name-font" style="font-family: inherit;">
+                                    <option value="Outfit" style="font-family: 'Outfit';">Default (Outfit)</option>
+                                    <option value="Lobster" style="font-family: 'Lobster';">Lobster</option>
+                                    <option value="Pacifico" style="font-family: 'Pacifico';">Pacifico</option>
+                                    <option value="Dancing Script" style="font-family: 'Dancing Script';">Dancing Script
+                                    </option>
+                                    <option value="Satisfy" style="font-family: 'Satisfy';">Satisfy</option>
+                                    <option value="Caveat" style="font-family: 'Caveat';">Caveat</option>
+                                    <option value="Amatic SC" style="font-family: 'Amatic SC';">Amatic SC</option>
+                                    <option value="Bebas Neue" style="font-family: 'Bebas Neue';">Bebas Neue</option>
+                                    <option value="Playfair Display" style="font-family: 'Playfair Display';">Playfair
+                                        Display</option>
+                                    <option value="Montserrat" style="font-family: 'Montserrat';">Montserrat</option>
+                                    <option value="Oswald" style="font-family: 'Oswald';">Oswald</option>
+                                    <option value="Roboto" style="font-family: 'Roboto';">Roboto</option>
+                                    <option value="Lato" style="font-family: 'Lato';">Lato</option>
+                                    <option value="Open Sans" style="font-family: 'Open Sans';">Open Sans</option>
+                                    <option value="Raleway" style="font-family: 'Raleway';">Raleway</option>
+                                    <option value="Poppins" style="font-family: 'Poppins';">Poppins</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Name Color</label>
+                                <div style="display: flex; gap: 10px; align-items: center;">
+                                    <input type="color" id="bill-rest-name-color" value="#ffffff"
+                                        style="width: 50px; height: 40px; padding: 2px; cursor: pointer; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-color);">
+                                    <span class="text-muted" style="font-size: 0.9rem;">Select Color</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" id="bill-rest-address" placeholder="Address line">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="text" id="bill-rest-phone" placeholder="Official Phone">
+                            </div>
+                            <div class="form-group">
+                                <label>GST Number</label>
+                                <input type="text" id="bill-rest-gst" placeholder="GSTIN (Optional)">
+                            </div>
+                            <div class="form-group">
+                                <label>Customer Care</label>
+                                <input type="text" id="bill-rest-cc" placeholder="Support Number">
+                            </div>
+                            <div class="form-group">
+                                <label>Footer Message</label>
+                                <input type="text" id="bill-footer-msg" placeholder="Footer Note">
+                            </div>
+                            <div class="form-group"
+                                style="grid-column: 1 / -1; border-top: 1px dashed var(--border-color); padding-top: 10px; margin-top: 5px;">
+                                <label>Restaurant Logo</label>
+                                <div style="display: flex; gap: 10px; align-items: center;">
+                                    <input type="file" id="bill-rest-logo-upload" accept="image/*"
+                                        style="flex: 1; padding: 5px;">
+                                    <button class="btn-secondary" id="clear-logo-btn" title="Reset to Icon">
+                                        <span class="material-icons-round">restart_alt</span>
+                                    </button>
+                                </div>
+                                <input type="hidden" id="bill-rest-logo-data">
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">Upload a small
+                                    square image for best results.</p>
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label>Bill Paper Size</label>
+                                <select id="bill-paper-size">
+                                    <option value="80mm">80mm (Standard 3")</option>
+                                    <option value="58mm">58mm (Small 2")</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn-primary" id="save-bill-settings-btn" style="margin-top: 10px;">Save
+                            Bill
+                            Settings</button>
+                    </div>
+
+                    <!-- Security Settings -->
+                    <div class="settings-section">
+                        <h3>Security Settings</h3>
+
+                        <!-- App Login Credentials -->
+                        <h4 style="margin-bottom: 10px; color: var(--text-muted); font-size: 0.95rem;">App Login
+                            Credentials (Main Screen)</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>New Username</label>
+                                <input type="text" id="new-login-username" placeholder="Enter new username">
+                            </div>
+                            <div class="form-group">
+                                <label>New Login Password</label>
+                                <input type="text" id="new-login-password" placeholder="Enter new password">
+                            </div>
+                        </div>
+                        <button class="btn-primary" id="save-login-creds-btn" style="margin-bottom: 20px;">Update Login
+                            Credentials</button>
+
+                        <!-- Operational Password Change -->
+                        <h4
+                            style="margin-bottom: 10px; color: var(--text-muted); font-size: 0.95rem; border-top: 1px dashed var(--border-color); padding-top: 15px;">
+                            Operations Password (Delete/Settings Access)
+                        </h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" id="current-password" placeholder="Enter current password">
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" id="new-password" placeholder="Enter new password">
+                            </div>
+                        </div>
+                        <div
+                            style="display: flex; gap: 10px; margin-top: 10px; align-items: center; margin-bottom: 20px;">
+                            <button class="btn-primary" id="change-password-btn">Change Password</button>
+                            <button class="btn-secondary" id="forgot-password-btn"
+                                style="color: var(--primary-color);">Forgot Password?</button>
+                        </div>
+
+                        <!-- Recovery Settings -->
+                        <h4
+                            style="border-top: 1px dashed var(--border-color); padding-top: 15px; margin-bottom: 10px; color: var(--text-muted); font-size: 0.95rem;">
+                            Recovery Settings (Forgot Password)</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Security Question</label>
+                                <input type="text" id="recovery-question" placeholder="e.g. What is your pet's name?">
+                            </div>
+                            <div class="form-group">
+                                <label>Security Answer</label>
+                                <input type="password" id="recovery-answer" placeholder="Enter answer">
+                            </div>
+                        </div>
+                        <button class="btn-primary" id="save-recovery-btn" style="margin-top: 10px;">Save
+                            Recovery
+                            Details</button>
+                    </div>
+
+                    <!-- Tax Configuration -->
+                    <div class="settings-section">
+                        <h3>Tax Configuration</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>SGST (%)</label>
+                                <input type="number" id="sgst-rate" value="2.5" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label>CGST (%)</label>
+                                <input type="number" id="cgst-rate" value="2.5" step="0.1">
+                            </div>
+                        </div>
+                        <button class="btn-primary" id="save-tax-btn">Save Tax Rates</button>
+                    </div>
+
+                    <!-- Additional Charges -->
+                    <div class="settings-section">
+                        <h3>Additional Charges</h3>
+                        <div class="add-item-form">
+                            <h4>Add New Charge</h4>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Charge Name</label>
+                                    <input type="text" id="new-charge-name" placeholder="e.g. Packaging">
+                                </div>
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select id="new-charge-type">
+                                        <option value="fixed">Fixed Amount (₹)</option>
+                                        <option value="percent">Percentage (%)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Value</label>
+                                    <input type="number" id="new-charge-value" placeholder="10">
+                                </div>
+                            </div>
+                            <button class="btn-primary" id="add-charge-btn" style="margin-top: 10px;">
+                                <span class="material-icons-round">add</span> Add Charge
+                            </button>
+                        </div>
+
+                        <div class="remove-item-section">
+                            <h4>Active Charges</h4>
+                            <div class="manage-items-list" id="manage-charges-list">
+                                <!-- Charges will be injected here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Management Section -->
+                    <div class="settings-section">
+                        <h3>Menu Management</h3>
+
+                        <!-- Add Item Form -->
+                        <div class="add-item-form">
+                            <h4>Add New Item</h4>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Item Name</label>
+                                    <input type="text" id="new-item-name" placeholder="e.g. Spicy Burger">
+                                </div>
+                                <div class="form-group">
+                                    <label>Price (₹)</label>
+                                    <input type="number" id="new-item-price" placeholder="199">
+                                </div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select id="new-item-category">
+                                        <option value="burgers">Burgers</option>
+                                        <option value="pizza">Pizza</option>
+                                        <option value="chicken">Fried Chicken</option>
+                                        <option value="wraps">Sandwich & Wraps</option>
+                                        <option value="sides">Sides</option>
+                                        <option value="drinks">Drinks</option>
+                                        <option value="desserts">Desserts</option>
+                                        <option value="combos">Combos</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Item Image</label>
+                                    <div class="drop-zone" id="drop-zone">
+                                        <span class="drop-zone__prompt">Drop image here or click to
+                                            upload</span>
+                                        <input type="file" class="drop-zone__input" id="new-item-image-file"
+                                            accept="image/*">
+                                        <div class="drop-zone__thumb" id="drop-zone-thumb"></div>
+                                    </div>
+                                    <input type="hidden" id="new-item-image">
+                                </div>
+                                <div class="form-group">
+                                    <label>Stock Quantity</label>
+                                    <input type="number" id="new-item-stock" placeholder="e.g. 50" value="100">
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                <button class="btn-primary" id="add-item-btn" style="flex: 1;">
+                                    <span class="material-icons-round">add</span> <span id="add-item-btn-text">Add
+                                        Item</span>
+                                </button>
+                                <button class="btn-secondary hidden" id="cancel-edit-item-btn" style="flex: 1;">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Remove Item List -->
+                        <div class="remove-item-section">
+                            <h4>Manage Items</h4>
+                            <div class="manage-items-list" id="manage-items-list">
+                                <!-- Items will be injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Cart Panel -->
+        <aside class="cart-panel">
+            <div class="cart-header">
+                <h2>Current Order</h2>
+                <span class="order-id" id="current-order-id-display">#Order-001</span>
+            </div>
+
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be injected here -->
+                <div class="empty-cart-message">
+                    <span class="material-icons-round">shopping_cart</span>
+                    <p>No items in cart</p>
+                </div>
+            </div>
+
+            <div class="cart-footer">
+                <div class="totals">
+                    <div class="row">
+                        <span>Subtotal</span>
+                        <span id="subtotal">₹0.00</span>
+                    </div>
+                    <div id="tax-charges-container"></div>
+                    <div class="row total">
+                        <span>Total</span>
+                        <span id="total">₹0.00</span>
+                    </div>
+                </div>
+                <div class="actions" style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; gap: 10px; width: 100%;">
+                        <button class="btn-secondary" id="print-btn" style="flex: 1; justify-content: center;">
+                            <span class="material-icons-round">print</span> Print
+                        </button>
+                        <button class="btn-primary" id="ebill-btn" style="flex: 1; justify-content: center;">
+                            <span class="material-icons-round">sms</span> E-Bill
+                        </button>
+                    </div>
+                    <button class="btn-secondary" id="send-to-list-btn"
+                        style="width: 100%; background-color: #6c757d; color: white; justify-content: center;">
+                        <span class="material-icons-round">list_alt</span> Send to Order List
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </div>
+    <!-- Customer Details Modal -->
+    <div class="modal-overlay" id="customer-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Customer Details</h3>
+                <button class="close-modal"><span class="material-icons-round">close</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>Customer Name</label>
+                    <input type="text" placeholder="John Doe" id="customer-name">
+                </div>
+                <div class="input-group">
+                    <label>Customer Phone Number</label>
+                    <input type="tel" placeholder="+91 98765 43210" id="customer-phone">
+                </div>
+                <div class="input-group">
+                    <label>Payment Method</label>
+                    <select id="payment-method">
+                        <option value="Cash">Cash</option>
+                        <option value="Card">Card</option>
+                        <option value="Online UPI">Online UPI</option>
+                    </select>
+                </div>
+                <div class="input-group" style="display: flex; gap: 10px; align-items: flex-end;">
+                    <div style="flex: 1;">
+                        <label>Discount Type</label>
+                        <select id="discount-type">
+                            <option value="percent">Percent (%)</option>
+                            <option value="fixed">Fixed (₹)</option>
+                        </select>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Discount Value</label>
+                        <input type="number" id="discount-value" placeholder="0">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" id="confirm-customer-details">Proceed</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Details Modal (View History & Edit) -->
+    <div class="modal-overlay" id="order-details-modal">
+        <div class="modal" style="width: 500px;">
+            <div class="modal-header">
+                <h3>Order Details</h3>
+                <button class="close-modal close-modal-details"><span class="material-icons-round">close</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="order-info-grid"
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Order ID</p>
+                        <p style="font-weight: bold;" id="view-order-id"></p>
+                    </div>
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Date</p>
+                        <p style="font-weight: bold;" id="view-order-date"></p>
+                    </div>
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Customer</p>
+                        <input type="text" id="edit-customer-name" class="edit-input hidden" placeholder="Name">
+                        <p style="font-weight: bold;" id="view-customer-name"></p>
+                    </div>
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Phone</p>
+                        <input type="text" id="edit-customer-phone" class="edit-input hidden" placeholder="Phone">
+                        <p style="font-weight: bold;" id="view-customer-phone"></p>
+                    </div>
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Payment</p>
+                        <select id="edit-payment-method" class="edit-input hidden">
+                            <option value="Cash">Cash</option>
+                            <option value="Card">Card</option>
+                            <option value="Online UPI">Online UPI</option>
+                        </select>
+                        <p style="font-weight: bold;" id="view-payment-method"></p>
+                    </div>
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Status</p>
+                        <select id="edit-order-status" class="edit-input hidden">
+                            <option value="Completed">Completed</option>
+                            <option value="Payable">Payable</option>
+                            <option value="Parcel">Parcel</option>
+                        </select>
+                        <span class="status completed" id="view-order-status">Completed</span>
+                    </div>
+                </div>
+                <hr style="border-top: 1px solid var(--border-color); margin: 1rem 0;">
+                <div style="max-height: 200px; overflow-y: auto;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tbody id="view-order-items">
+                            <!-- Items -->
+                        </tbody>
+                    </table>
+                </div>
+                <hr style="border-top: 1px dashed var(--border-color); margin: 1rem 0;">
+                <div class="receipt-totals">
+                    <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Subtotal:</span> <span id="view-order-subtotal"></span>
+                    </div>
+                    <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Tax:</span> <span id="view-order-tax"></span>
+                    </div>
+                    <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Charges:</span> <span id="view-order-charges"></span>
+                    </div>
+                    <div class="row"
+                        style="display: flex; justify-content: space-between; margin-bottom: 5px; color: green;">
+                        <span>Discount:</span> <span id="view-order-discount">-₹0.00</span>
+                    </div>
+                    <div class="row total"
+                        style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem; margin-top: 10px;">
+                        <span>Total:</span> <span id="view-order-total"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-secondary" id="reprint-order-btn"
+                        style="display: flex; align-items: center; gap: 5px;">
+                        <span class="material-icons-round" style="font-size: 1.1rem;">print</span> Print
+                    </button>
+                    <button class="btn-secondary" id="resend-ebill-btn"
+                        style="display: flex; align-items: center; gap: 5px; background-color: #25D366; color: white; border: none;">
+                        <span class="material-icons-round" style="font-size: 1.1rem;">send</span> WhatsApp
+                    </button>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-danger" id="delete-order-btn">Delete</button>
+                    <button class="btn-secondary" id="edit-order-btn">Edit</button>
+                    <button class="btn-primary hidden" id="save-order-btn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Receipt for Printing -->
+    <div id="printable-area" class="hidden">
+        <div class="receipt">
+            <div class="receipt-header">
+                <h2>Meat & Eat</h2>
+                <p>123 Food Street, Flavor Town</p>
+                <p>Tel: +91 1234567890</p>
+                <hr>
+                <p>Date: <span id="receipt-date"></span></p>
+                <p>Order #: <span id="receipt-order-id"></span></p>
+                <div id="receipt-customer-details">
+                    <p>Customer: <span id="receipt-customer-name"></span></p>
+                    <p>Phone: <span id="receipt-customer-phone"></span></p>
+                    <p>Payment: <span id="receipt-payment-method"></span></p>
+                </div>
+            </div>
+            <hr>
+            <table class="receipt-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="receipt-items">
+                    <!-- Items -->
+                </tbody>
+            </table>
+            <hr>
+            <div class="receipt-totals">
+                <div class="row"><span>Subtotal:</span> <span id="receipt-subtotal"></span></div>
+                <div id="receipt-tax-charges-container"></div>
+                <div class="row total"><span>Total:</span> <span id="receipt-total"></span></div>
+            </div>
+            <hr>
+            <div class="receipt-footer">
+                <p>Thank you for dining with us!</p>
+            </div>
+        </div>
+    </div>
+    <!-- Reports Logic -->
+    <script src="reports.js"></script>
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>

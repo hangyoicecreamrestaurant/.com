@@ -1,0 +1,245 @@
+                    <!-- Settings View -->
+                    <div id="settings-view" class="view-section hidden">
+                        <h2>Settings</h2>
+                        <div class="settings-container">
+
+                            <!-- Bill / Restaurant Configuration -->
+                            <div class="settings-section" style="margin-top: 0; padding-top: 0; border-top: none;">
+                                <h3>Restaurant & Bill Settings</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Restaurant Name</label>
+                                        <input type="text" id="bill-rest-name" placeholder="Meat & Eat">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="text" id="bill-rest-address" placeholder="Address line">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="text" id="bill-rest-phone" placeholder="Official Phone">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>GST Number</label>
+                                        <input type="text" id="bill-rest-gst" placeholder="GSTIN (Optional)">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Customer Care</label>
+                                        <input type="text" id="bill-rest-cc" placeholder="Support Number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Footer Message</label>
+                                        <input type="text" id="bill-footer-msg" placeholder="Footer Note">
+                                    </div>
+                                </div>
+                                <button class="btn-primary" id="save-bill-settings-btn" style="margin-top: 10px;">Save
+                                    Bill
+                                    Settings</button>
+                            </div>
+
+                            <!-- Security Settings -->
+                            <div class="settings-section">
+                                <h3>Security Settings</h3>
+
+                                <!-- Password Change -->
+                                <h4 style="margin-bottom: 10px; color: var(--text-muted); font-size: 0.95rem;">Change
+                                    Password
+                                </h4>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Current Password</label>
+                                        <input type="password" id="current-password"
+                                            placeholder="Enter current password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>New Password</label>
+                                        <input type="password" id="new-password" placeholder="Enter new password">
+                                    </div>
+                                </div>
+                                <div
+                                    style="display: flex; gap: 10px; margin-top: 10px; align-items: center; margin-bottom: 20px;">
+                                    <button class="btn-primary" id="change-password-btn">Change Password</button>
+                                    <button class="btn-secondary" id="forgot-password-btn"
+                                        style="color: var(--primary-color);">Forgot Password?</button>
+                                </div>
+
+                                <!-- Recovery Settings -->
+                                <h4
+                                    style="border-top: 1px dashed var(--border-color); padding-top: 15px; margin-bottom: 10px; color: var(--text-muted); font-size: 0.95rem;">
+                                    Recovery Settings (Forgot Password)</h4>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Security Question</label>
+                                        <input type="text" id="recovery-question"
+                                            placeholder="e.g. What is your pet's name?">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Security Answer</label>
+                                        <input type="password" id="recovery-answer" placeholder="Enter answer">
+                                    </div>
+                                </div>
+                                <button class="btn-primary" id="save-recovery-btn" style="margin-top: 10px;">Save
+                                    Recovery
+                                    Details</button>
+                            </div>
+
+                            <!-- Tax Configuration -->
+                            <div class="settings-section">
+                                <h3>Tax Configuration</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>SGST (%)</label>
+                                        <input type="number" id="sgst-rate" value="2.5" step="0.1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CGST (%)</label>
+                                        <input type="number" id="cgst-rate" value="2.5" step="0.1">
+                                    </div>
+                                </div>
+                                <button class="btn-primary" id="save-tax-btn">Save Tax Rates</button>
+                            </div>
+
+                            <!-- Additional Charges -->
+                            <div class="settings-section">
+                                <h3>Additional Charges</h3>
+                                <div class="add-item-form">
+                                    <h4>Add New Charge</h4>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label>Charge Name</label>
+                                            <input type="text" id="new-charge-name" placeholder="e.g. Packaging">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Type</label>
+                                            <select id="new-charge-type">
+                                                <option value="fixed">Fixed Amount (₹)</option>
+                                                <option value="percent">Percentage (%)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Value</label>
+                                            <input type="number" id="new-charge-value" placeholder="10">
+                                        </div>
+                                    </div>
+                                    <button class="btn-primary" id="add-charge-btn" style="margin-top: 10px;">
+                                        <span class="material-icons-round">add</span> Add Charge
+                                    </button>
+                                </div>
+
+                                <div class="remove-item-section">
+                                    <h4>Active Charges</h4>
+                                    <div class="manage-items-list" id="manage-charges-list">
+                                        <!-- Charges will be injected here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Menu Management Section -->
+                            <div class="settings-section">
+                                <h3>Menu Management</h3>
+
+                                <!-- Add Item Form -->
+                                <div class="add-item-form">
+                                    <h4>Add New Item</h4>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label>Item Name</label>
+                                            <input type="text" id="new-item-name" placeholder="e.g. Spicy Burger">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Price (₹)</label>
+                                            <input type="number" id="new-item-price" placeholder="199">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Category</label>
+                                            <select id="new-item-category">
+                                                <option value="burgers">Burgers</option>
+                                                <option value="pizza">Pizza</option>
+                                                <option value="drinks">Drinks</option>
+                                                <option value="desserts">Desserts</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Item Image</label>
+                                            <div class="drop-zone" id="drop-zone">
+                                                <span class="drop-zone__prompt">Drop image here or click to
+                                                    upload</span>
+                                                <input type="file" class="drop-zone__input" id="new-item-image-file"
+                                                    accept="image/*">
+                                                <div class="drop-zone__thumb" id="drop-zone-thumb"></div>
+                                            </div>
+                                            <input type="hidden" id="new-item-image">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Stock Quantity</label>
+                                            <input type="number" id="new-item-stock" placeholder="e.g. 50" value="100">
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                        <button class="btn-primary" id="add-item-btn" style="flex: 1;">
+                                            <span class="material-icons-round">add</span> <span
+                                                id="add-item-btn-text">Add
+                                                Item</span>
+                                        </button>
+                                        <button class="btn-secondary hidden" id="cancel-edit-item-btn" style="flex: 1;">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Remove Item List -->
+                                <div class="remove-item-section">
+                                    <h4>Manage Items</h4>
+                                    <div class="manage-items-list" id="manage-items-list">
+                                        <!-- Items will be injected here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- Cart Panel -->
+                <aside class="cart-panel">
+                    <div class="cart-header">
+                        <h2>Current Order</h2>
+                        <span class="order-id" id="current-order-id-display">#Order-001</span>
+                    </div>
+
+                    <div class="cart-items" id="cart-items">
+                        <!-- Cart items will be injected here -->
+                        <div class="empty-cart-message">
+                            <span class="material-icons-round">shopping_cart</span>
+                            <p>No items in cart</p>
+                        </div>
+                    </div>
+
+                    <div class="cart-footer">
+                        <div class="totals">
+                            <div class="row">
+                                <span>Subtotal</span>
+                                <span id="subtotal">₹0.00</span>
+                            </div>
+                            <div id="tax-charges-container"></div>
+                            <div class="row total">
+                                <span>Total</span>
+                                <span id="total">₹0.00</span>
+                            </div>
+                        </div>
+                        <div class="actions" style="display: flex; flex-direction: column; gap: 10px;">
+                            <div style="display: flex; gap: 10px; width: 100%;">
+                                <button class="btn-secondary" id="print-btn" style="flex: 1; justify-content: center;">
+                                    <span class="material-icons-round">print</span> Print
+                                </button>
+                                <button class="btn-primary" id="ebill-btn" style="flex: 1; justify-content: center;">
+                                    <span class="material-icons-round">sms</span> E-Bill
+                                </button>
+                            </div>
+                            <button class="btn-secondary" id="send-to-list-btn"
+                                style="width: 100%; background-color: #6c757d; color: white; justify-content: center;">
+                                <span class="material-icons-round">list_alt</span> Send to Order List
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+            </div>

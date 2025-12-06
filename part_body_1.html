@@ -1,0 +1,169 @@
+        <body>
+            <div class="app-container">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="logo">
+                        <span class="material-icons-round">restaurant_menu</span>
+                        <h1>Meat & Eat</h1>
+                    </div>
+                    <nav class="nav-menu">
+                        <a href="#" class="nav-item" id="nav-home">
+                            <span class="material-icons-round">home</span>
+                            <span>Home</span>
+                        </a>
+                        <a href="#" class="nav-item active" id="nav-menu">
+                            <span class="material-icons-round">dashboard</span>
+                            <span>Menu</span>
+                        </a>
+                        <a href="#" class="nav-item" id="nav-orders">
+                            <span class="material-icons-round">receipt_long</span>
+                            <span>Orders</span>
+                        </a>
+                        <a href="#" class="nav-item" id="nav-reports">
+                            <span class="material-icons-round">insights</span>
+                            <span>Reports</span>
+                        </a>
+                        <a href="#" class="nav-item" id="nav-settings">
+                            <span class="material-icons-round">settings</span>
+                            <span>Settings</span>
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="main-content">
+                    <header class="top-bar">
+                        <div class="search-bar">
+                            <span class="material-icons-round">search</span>
+                            <input type="text" id="global-search-input" placeholder="Search menu items...">
+                        </div>
+                        <div class="user-profile">
+                            <span>Cashier</span>
+                            <div class="avatar">C</div>
+                        </div>
+                    </header>
+
+                    <!-- Home / Table View -->
+                    <div id="home-view" class="view-section hidden">
+                        <div class="orders-header-bar">
+                            <h2>Table Management</h2>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn-secondary" id="reset-tables-btn" style="color: #666;">
+                                    <span class="material-icons-round">restart_alt</span> Reset All
+                                </button>
+                                <button class="btn-primary" id="add-table-btn">
+                                    <span class="material-icons-round">add</span> Add Table
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Table Stats & Filters -->
+                        <div class="table-dashboard-grid"
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                            <div class="stat-card"
+                                style="background: white; padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                                <h4 style="color: var(--text-muted); font-size: 0.9rem;">Total Tables</h4>
+                                <p id="table-stat-total"
+                                    style="font-size: 1.5rem; font-weight: bold; color: var(--text-main);">
+                                    0</p>
+                            </div>
+                            <div class="stat-card"
+                                style="background: white; padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                                <h4 style="color: var(--text-muted); font-size: 0.9rem;">Occupied</h4>
+                                <p id="table-stat-occupied"
+                                    style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">0</p>
+                            </div>
+                            <div class="stat-card"
+                                style="background: white; padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                                <h4 style="color: var(--text-muted); font-size: 0.9rem;">Available</h4>
+                                <p id="table-stat-available"
+                                    style="font-size: 1.5rem; font-weight: bold; color: #28a745;">0</p>
+                            </div>
+                        </div>
+
+                        <div class="table-filters" style="margin-bottom: 1.5rem; display: flex; gap: 10px;">
+                            <button class="tab active" id="filter-table-all">All</button>
+                            <button class="tab" id="filter-table-available">Available</button>
+                            <button class="tab" id="filter-table-occupied">Occupied</button>
+                        </div>
+                        <div class="tables-grid" id="tables-grid"
+                            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.5rem;">
+                            <!-- Tables injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Menu View -->
+                    <div id="menu-view" class="view-section">
+                        <!-- ... existing menu content ... -->
+                        <div class="category-tabs">
+                            <button class="tab active" data-category="all">All</button>
+                            <button class="tab" data-category="burgers">Burgers</button>
+                            <button class="tab" data-category="pizza">Pizza</button>
+                            <button class="tab" data-category="drinks">Drinks</button>
+                            <button class="tab" data-category="desserts">Desserts</button>
+                        </div>
+                        <div class="menu-controls"
+                            style="margin-bottom: 20px; display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap;">
+                            <input type="number" id="menu-min-price" placeholder="Min ₹"
+                                style="padding: 8px; width: 80px; border-radius: 6px; border: 1px solid #ddd;">
+                            <input type="number" id="menu-max-price" placeholder="Max ₹"
+                                style="padding: 8px; width: 80px; border-radius: 6px; border: 1px solid #ddd;">
+
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <label for="menu-sort" style="font-weight: 500;">Sort:</label>
+                                <select id="menu-sort"
+                                    style="padding: 8px; border-radius: 6px; border: 1px solid #ddd;">
+                                    <option value="default">Default</option>
+                                    <option value="low-to-high">Low to High</option>
+                                    <option value="high-to-low">High to Low</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="menu-grid" id="menu-grid">
+                            <!-- Menu items will be injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Orders View -->
+                    <div id="orders-view" class="view-section hidden">
+                        <!-- ... existing orders content ... -->
+                        <div class="orders-header-bar"
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h2>Order History</h2>
+                            <div class="orders-actions" style="display: flex; gap: 10px;">
+                                <input type="date" id="filter-date-start" class="form-control"
+                                    style="padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                                <input type="date" id="filter-date-end" class="form-control"
+                                    style="padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                                <button class="btn-primary" id="download-report-btn">
+                                    <span class="material-icons-round">download</span> Report
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="orders-stats"
+                            style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+                            <div class="stat-card"
+                                style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <h4>Total Orders</h4>
+                                <p id="stats-total-orders"
+                                    style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">0</p>
+                            </div>
+                            <div class="stat-card"
+                                style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <h4>Total Revenue</h4>
+                                <p id="stats-total-revenue"
+                                    style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">₹0.00</p>
+                            </div>
+                            <div class="stat-card"
+                                style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <h4>Average Order</h4>
+                                <p id="stats-avg-order"
+                                    style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">₹0.00</p>
+                            </div>
+                        </div>
+                        <div class="orders-list" id="orders-history-list">
+                            <!-- Orders List -->
+                        </div>
+                    </div>
